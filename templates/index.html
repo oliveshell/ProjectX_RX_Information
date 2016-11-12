@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Bootstrap Admin Theme</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -487,7 +487,7 @@
                                                         placeholder="输入搜索内容" >
                                                     </div>
                                                     <div class = "col-md-2">
-                                                    <button type="submit" class="input-sm form-control btn-info" id = "fresh_config" onclick="startConnect()">search</button>
+                                                    <button type="submit" class="input-sm form-control btn-info" id = "fresh_config" onclick="startSearch()">search</button>
                                                     </div>
                                         </div>
                                         
@@ -538,68 +538,8 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <ul class="chat">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
-                                            </small>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
+                            <ul class="chat" id = "listChat">
+                                
                             </ul>
                         </div>
                         <!-- /.panel-body -->
@@ -944,7 +884,7 @@
         $('#date_1').datepicker({});
     $('#date_2').datepicker({});
         setInterval(function(){
-                            addNotice();
+                            //addNotice();
                                 },5000);
 
         var addNotice = function(){
@@ -959,6 +899,51 @@
         listGroup.innerHTML+= html
 
         }
+    var startSearch = function(){
+        var search_config = {};
+        //ajax get data
+        $.ajax({
+                type: "GET",
+                url: '/search',
+                async: true,
+                data: search_config,
+                success: function(msg){ 
+                    msg =JSON.parse(msg);
+                     console.log(msg);
+                     var listChat = document.getElementById('listChat');
+                     for (var i=0;i<msg.length;i++)
+                     {
+                            var chatItem = ' '
+                            +'<li class="left clearfix">'
+                             +       '<span class="chat-img pull-left">'
+                             +           '<img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />'
+                             +       '</span>'
+                             +       '<div class="chat-body clearfix">'
+                             +           '<div class="header">'
+                             +              '<strong class="primary-font">'
+                             +               msg[i][0]
+                             +               '</strong>'
+                             +               '<small class="pull-right text-muted">'
+                             +                   '<i class="fa fa-clock-o fa-fw"></i>'
+                             +                    msg[i][2]
+                             +               '</small>'
+                             +           '</div>'
+                             +           '<p>'
+                             +            msg[i][1]
+                             +          '</p>'
+                             +     '</div>'
+                               + '</li>'
+                            listChat.innerHTML+=chatItem;
+                     };
+                    },      
+                error: function (msg) {
+                    //alert('获取数据失败');
+                    // console.log(msg);
+                    // $('#button'+index.toString()).disabled = "false";
+                },
+                dataType:'text'
+            });
+    };
     </script>
 </body>
 
