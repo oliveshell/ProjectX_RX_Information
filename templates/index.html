@@ -489,6 +489,11 @@
                                                     <div class = "col-md-2">
                                                     <button type="submit" class="input-sm form-control btn-info" id = "fresh_config" onclick="startSearch()">search</button>
                                                     </div>
+                                                    <div class = "col-md-2">
+                                                    <button type="submit" class="input-sm form-control btn-primary" id = "download" onclick="download()">download</button>
+
+                                                    </div>
+
                                         </div>
                                         
                                    </div>
@@ -899,6 +904,9 @@
         listGroup.innerHTML+= html
 
         }
+    var download = function(){
+        window.location = "static/demo.docx";
+    };
     var startSearch = function(){
         var search_config = {};
         //ajax get data
