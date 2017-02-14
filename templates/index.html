@@ -910,7 +910,20 @@
                 success: function(msg){ 
                     msg =JSON.parse(msg);
                      console.log(msg);
-                     var listChat = document.getElementById('listChat');
+                     addWeibo(msg);
+                     addPicture(msg);
+                     
+                    },      
+                error: function (msg) {
+                    //alert('获取数据失败');
+                    // console.log(msg);
+                    // $('#button'+index.toString()).disabled = "false";
+                },
+                dataType:'text'
+            });
+    };
+    var addWeibo = function(msg){
+        var listChat = document.getElementById('listChat');
                      for (var i=0;i<msg.length;i++)
                      {
                             var chatItem = ' '
@@ -932,17 +945,15 @@
                              +            msg[i][1]
                              +          '</p>'
                              +     '</div>'
+                             +      '<div>'
+                             +          '<img src="'+msg[i][3]+'"'
+                             +          'style="vertical-align:middle;"/>'
                                + '</li>'
                             listChat.innerHTML+=chatItem;
                      };
-                    },      
-                error: function (msg) {
-                    //alert('获取数据失败');
-                    // console.log(msg);
-                    // $('#button'+index.toString()).disabled = "false";
-                },
-                dataType:'text'
-            });
+    };
+    var addPicture = function(msg){
+
     };
     </script>
 </body>

@@ -2,12 +2,12 @@
 from flask import request, Flask, render_template, redirect, url_for,session     
 import time,datetime
 app = Flask(__name__)  
-from docx import Document
-from docx.shared import Inches                                                    
+#from docx import Document
+#from docx.shared import Inches                                                    
                                                  
 
 
-app.secret_key = 'test_program'
+app.secret_key = 'rongxun_program'
 
 
                   
@@ -26,18 +26,18 @@ def search():
 		nrows=sheet.nrows
 		ncols = sheet.ncols
 		for rownum in range(1,sheet.nrows):
-			temp = [sheet.cell(rownum,0).value,sheet.cell(rownum,4).value,sheet.cell(rownum,6).value,sheet.cell(rownum,8).value]
+			temp = [sheet.cell(rownum,0).value,sheet.cell(rownum,4).value,sheet.cell(rownum,6).value,sheet.cell(rownum,5).value]
 			search_result.append(temp)
 	except:
 		pass
-	print search_result
+	#print search_result
 	return json.dumps(search_result)
 
 
 
 
 if __name__ == '__main__':                                                 
-    app.run('0.0.0.0', 8889,debug=True) 
+    app.run('0.0.0.0', 8888,debug=True) 
 
 
 
