@@ -66,5 +66,8 @@ def readExcel():
 	ncols = sheet.ncols
 	for rownum in range(sheet.nrows):
 		print sheet.cell(rownum,4).value
-initWord()
-readImage()
+def createWord():
+	initWord()
+	readImage()
+if __name__ =="__main__":
+	createWord()

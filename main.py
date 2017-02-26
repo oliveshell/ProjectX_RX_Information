@@ -4,8 +4,8 @@ import time,datetime
 app = Flask(__name__)  
 #from docx import Document
 #from docx.shared import Inches                                                    
-                                                 
-
+import weibo_spider_search as spider                                             
+import py2wordtest as wordutil
 
 app.secret_key = 'rongxun_program'
 
@@ -21,13 +21,29 @@ def search():
 	import xlrd,os,json
 	search_result = []
 	try:
-		file = xlrd.open_workbook('./crawl_output_YS.xls')
-		sheet= file.sheets()[0]
-		nrows=sheet.nrows
-		ncols = sheet.ncols
-		for rownum in range(1,sheet.nrows):
-			temp = [sheet.cell(rownum,0).value,sheet.cell(rownum,4).value,sheet.cell(rownum,6).value,sheet.cell(rownum,5).value]
-			search_result.append(temp)
+		#try using the spider with search content,search time,usename,password
+		#use the default temporly
+		key = '江小白'
+		mspider = spider.Spider('username','password',key)
+		mspider.GetSearchContent(key)
+		while mspider.parseSuccess==True:
+			file = xlrd.open_workbook('./crawl_output_YS.xls')
+			sheet= file.sheets()[0]
+			nrows=sheet.nrows
+			ncols = sheet.ncols
+			for rownum in range(1,sheet.nrows):
+				temp = [sheet.cell(rownum,0).value,sheet.cell(rownum,4).value,sheet.cell(rownum,6).value,sheet.cell(rownum,5).value]
+				search_result.append(temp)
+			mspider.parseSuccess = False
+			wordutil.createWord()
+		# #if spider error,open the default file
+		# file = xlrd.open_workbook('./crawl_output_YS.xls')
+		# sheet= file.sheets()[0]
+		# nrows=sheet.nrows
+		# ncols = sheet.ncols
+		# for rownum in range(1,sheet.nrows):
+		# 	temp = [sheet.cell(rownum,0).value,sheet.cell(rownum,4).value,sheet.cell(rownum,6).value,sheet.cell(rownum,5).value]
+		# 	search_result.append(temp)
 	except:
 		pass
 	#print search_result
