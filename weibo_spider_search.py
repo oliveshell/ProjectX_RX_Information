@@ -103,8 +103,8 @@ class Spider(object):
         #global page
 
         #需要抓取的开始和结束日期
-        start_date = datetime.datetime(2016,8,25,0)
-        end_date = datetime.datetime(2016,8,26,0)
+        #start_date = datetime.datetime(2016,8,25,0)
+        #end_date = datetime.datetime(2016,8,26,0)
         delta_date = datetime.timedelta(days=1)
 
         #每次抓取一天的数据
@@ -251,56 +251,56 @@ class Spider(object):
                 BZZY = nodes[i].find_element_by_xpath(".//div[@class='feed_content wbcon']/a[@class='W_texta W_fb']").get_attribute("href")
             except:
                 BZZY = ''
-            print u'博主主页:', BZZY
+            #print u'博主主页:', BZZY
             dic[i].append(BZZY)
 
             try:
                 WBRZ = nodes[i].find_element_by_xpath(".//div[@class='feed_content wbcon']/a[@class='approve_co']").get_attribute('title')#若没有认证则不存在节点
             except:
                 WBRZ = ''
-            print u'微博认证:', WBRZ
+            #print u'微博认证:', WBRZ
             dic[i].append(WBRZ)
 
             try:
                 WBDR = nodes[i].find_element_by_xpath(".//div[@class='feed_content wbcon']/a[@class='ico_club']").get_attribute('title')#若非达人则不存在节点
             except:
                 WBDR = ''
-            print u'微博达人:', WBDR
+            #print u'微博达人:', WBDR
             dic[i].append(WBDR)
 
             try:
                 WBNR = nodes[i].find_element_by_xpath(".//div[@class='feed_content wbcon']/p[@class='comment_txt']").text
             except:
                 WBNR = ''
-            print u'微博内容:', WBNR
+            #print u'微博内容:', WBNR
             dic[i].append(WBNR)
 
             try:
                 WBTP = nodes[i].find_element_by_xpath(".//div[@class='media_box']/ul/li/img").get_attribute("src")
             except:
                 WBTP = ''
-            print u'微博图片:', WBTP
+            #print u'微博图片:', WBTP
             dic[i].append(WBTP)
 
             try:
                 FBSJ = nodes[i].find_element_by_xpath(".//div[@class='feed_from W_textb']/a[@class='W_textb']").text
             except:
                 FBSJ = ''
-            print u'发布时间:', FBSJ
+            #print u'发布时间:', FBSJ
             dic[i].append(FBSJ)
 
             try:
                 WBDZ = nodes[i].find_element_by_xpath(".//div[@class='feed_from W_textb']/a[@class='W_textb']").get_attribute("href")
             except:
                 WBDZ = ''
-            print u'微博地址:', WBDZ
+            #print u'微博地址:', WBDZ
             dic[i].append(WBDZ)
 
             try:
                 WBLY = nodes[i].find_element_by_xpath(".//div[@class='feed_from W_textb']/a[@rel]").text
             except:
                 WBLY = ''
-            print u'微博来源:', WBLY
+            #print u'微博来源:', WBLY
             dic[i].append(WBLY)
 
             try:
@@ -311,7 +311,7 @@ class Spider(object):
                     ZF = int(ZF_TEXT)
             except:
                 ZF = 0
-            print u'转发:', ZF
+            #print u'转发:', ZF
             dic[i].append(str(ZF))
 
             try:
@@ -322,7 +322,7 @@ class Spider(object):
                     PL = int(PL_TEXT)
             except:
                 PL = 0
-            print u'评论:', PL
+            #print u'评论:', PL
             dic[i].append(str(PL))
 
             try:
@@ -333,7 +333,7 @@ class Spider(object):
                     ZAN = int(ZAN_TEXT)
             except:
                 ZAN = 0
-            print u'赞:', ZAN
+            #print u'赞:', ZAN
             dic[i].append(str(ZAN))
 
             print '\n'
