@@ -85,7 +85,7 @@ class Spider(object):
     #                     考虑没有搜索结果、翻页效果的情况
     #********************************************************************************    
 
-    def GetSearchContent(self,key):
+    def GetSearchContent(self,key,start_date=datetime.datetime(2016,8,25,0),end_date=datetime.datetime(2016,8,26,0)):
 
         self.driver.get("http://s.weibo.com/")
         print '搜索热点主题：', key.decode('utf-8')

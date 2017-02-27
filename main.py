@@ -20,12 +20,14 @@ def index():
 def search(): 
 	import xlrd,os,json
 	search_result = []
+	if request.args:
+		dateConfig = GetSearchTimeConfig(request.args)
 	try:
 		#try using the spider with search content,search time,usename,password
 		#use the default temporly
 		key = '江小白'
 		mspider = spider.Spider('username','password',key)
-		mspider.GetSearchContent(key)
+		mspider.GetSearchContent(key,dateConfig[0],dateConfig[1])
 		while mspider.parseSuccess==True:
 			file = xlrd.open_workbook('./crawl_output_YS.xls')
 			sheet= file.sheets()[0]
@@ -49,7 +51,16 @@ def search():
 	#print search_result
 	return json.dumps(search_result)
 
-
+def GetSearchTimeConfig(req):
+	start_date = req.get('start',None)
+	end_date = req.get('end',None)
+	import time,datetime
+	start = start_date.split('/')
+	end = end_date.split('/')
+	start_time = datetime.datetime(int(start[2]),int(start[1]),int(start[0]),0)
+	end_time = datetime.datetime(int(end[2]),int(end[1]),int(end[0]),0)
+	result = [start_time,end_time]
+	print result
 
 
 if __name__ == '__main__':                                                 
