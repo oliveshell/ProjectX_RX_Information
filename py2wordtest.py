@@ -5,15 +5,15 @@ imgUrl = []
 def initWord():
 	document = Document()
 
-	document.add_heading('Document Title', 0)
+	document.add_heading(u'微博搜索相关内容', 0)
 
-	p = document.add_paragraph('A plain paragraph having some ')
-	p.add_run('bold').bold = True
-	p.add_run(' and some ')
-	p.add_run('italic.').italic = True
+	p = document.add_paragraph(u'详细内容，模板待修改')
+	# p.add_run('bold').bold = True
+	# p.add_run(' and some ')
+	# p.add_run('italic.').italic = True
 
-	document.add_heading('Heading, level 1', level=1)
-	document.add_paragraph('Intense quote', style='IntenseQuote')
+	document.add_heading(u'内容', level=1)
+	#document.add_paragraph('Intense quote', style='IntenseQuote')
 
 
 
@@ -67,6 +67,7 @@ def readExcel():
 	for rownum in range(sheet.nrows):
 		print sheet.cell(rownum,4).value
 def createWord():
+	print 'create word'
 	initWord()
 	readImage()
 if __name__ =="__main__":

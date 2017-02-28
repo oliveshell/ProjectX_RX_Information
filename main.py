@@ -5,7 +5,7 @@ app = Flask(__name__)
 #from docx import Document
 #from docx.shared import Inches                                                    
 import weibo_spider_search as spider                                             
-#import py2wordtest as wordutil
+import py2wordtest as wordutil
 
 app.secret_key = 'rongxun_program'
 
@@ -22,10 +22,16 @@ def search():
 	search_result = []
 	if request.args:
 		dateConfig = GetSearchTimeConfig(request.args)
+		# key = request.args.get('search_input')
+		# key = key.encode('utf-8').decode('utf-8')
+		# mspider = spider.Spider('username','password',key)
+		# mspider.GetSearchContent(key,dateConfig[0],dateConfig[1])
 	try:
 		#try using the spider with search content,search time,usename,password
 		#use the default temporly
 		key = '江小白'
+		key = request.args.get('search_input')
+		key = key.encode('utf-8').decode('utf-8')
 		mspider = spider.Spider('username','password',key)
 		mspider.GetSearchContent(key,dateConfig[0],dateConfig[1])
 		while mspider.parseSuccess==True:
@@ -37,7 +43,7 @@ def search():
 				temp = [sheet.cell(rownum,0).value,sheet.cell(rownum,4).value,sheet.cell(rownum,6).value,sheet.cell(rownum,5).value]
 				search_result.append(temp)
 			mspider.parseSuccess = False
-			#wordutil.createWord()
+			wordutil.createWord()
 		# #if spider error,open the default file
 		# file = xlrd.open_workbook('./crawl_output_YS.xls')
 		# sheet= file.sheets()[0]
@@ -57,8 +63,9 @@ def GetSearchTimeConfig(req):
 	import time,datetime
 	start = start_date.split('/')
 	end = end_date.split('/')
-	start_time = datetime.datetime(int(start[2]),int(start[1]),int(start[0]),0)
-	end_time = datetime.datetime(int(end[2]),int(end[1]),int(end[0]),0)
+	
+	start_time = datetime.datetime(int(start[2]),int(start[0]),int(start[1]),0)
+	end_time = datetime.datetime(int(end[2]),int(end[0]),int(end[1]),0)
 	result = [start_time,end_time]
 	print result
 	return result

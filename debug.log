@@ -891,3 +891,9 @@
 [0227/223652:WARNING:in_range_cast.h(38)] value 2722650268406 out of range
 [0227/223652:WARNING:in_range_cast.h(38)] value 2722650267606 out of range
 [0227/223652:WARNING:in_range_cast.h(38)] value 2722650263126 out of range
+[0228/210532.647:ERROR:process_reader_win.cc(114)] NtOpenThread: {无法访问} 过程已请求访问一对象，但未给访问权限。  (0xc0000022)
+[0228/210532.671:ERROR:exception_snapshot_win.cc(87)] thread ID 15008 not found in process
+[0228/210532.671:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed
+[0228/210532.806:ERROR:process_reader_win.cc(114)] NtOpenThread: {无法访问} 过程已请求访问一对象，但未给访问权限。  (0xc0000022)
+[0228/210532.806:ERROR:exception_snapshot_win.cc(87)] thread ID 14976 not found in process
+[0228/210532.806:WARNING:crash_report_exception_handler.cc(60)] ProcessSnapshotWin::Initialize failed

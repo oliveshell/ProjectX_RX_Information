@@ -88,11 +88,11 @@ class Spider(object):
     def GetSearchContent(self,key,start_date=datetime.datetime(2016,8,25,0),end_date=datetime.datetime(2016,8,26,0)):
 
         self.driver.get("http://s.weibo.com/")
-        print '搜索热点主题：', key.decode('utf-8')
+        print '搜索热点主题：', key
 
         #输入关键词并点击搜索
         item_inp = self.driver.find_element_by_xpath("//input[@class='searchInp_form']")
-        item_inp.send_keys(key.decode('utf-8'))
+        item_inp.send_keys(key)
         item_inp.send_keys(Keys.RETURN)    #采用点击回车直接搜索
 
         #获取搜索词的URL，用于后期按时间查询的URL拼接
@@ -351,8 +351,9 @@ if __name__ == '__main__':
     password = '*'               #输入你的密码
     #搜索热点微博 爬取评论
     key = '江小白' 
+    print key
     spider = Spider(username,password,key)
     #操作函数
     #spider.LoginWeibo(username, password)       #登陆微博
 
-    spider.GetSearchContent(key)
+    spider.GetSearchContent(key.decode('utf-8'))
